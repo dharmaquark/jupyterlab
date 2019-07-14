@@ -19,11 +19,6 @@
   overflow-y: auto;
 }
 
-.jp-OutputArea:after {
-  content: '';
-  position: absolute;
-}
-
 .jp-OutputArea-child {
   display: flex;
   flex-direction: row;
