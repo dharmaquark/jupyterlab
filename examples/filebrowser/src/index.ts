@@ -49,7 +49,6 @@ function createApp(manager: ServiceManager.IManager): void {
 
   let opener = {
     open: (widget: Widget) => {
-      console.error('TRYING TO OPEN WIDGET');
       if (widgets.indexOf(widget) === -1) {
         dock.addWidget(widget, { mode: 'tab-after' });
         widgets.push(widget);
@@ -92,7 +91,6 @@ function createApp(manager: ServiceManager.IManager): void {
     readOnly: true
   });
   docRegistry.addWidgetFactory(wFactory);
-  console.error('ADDING IMAGE FACTORY');
   docRegistry.addWidgetFactory(imgFactory);
 
   let commands = new CommandRegistry();
