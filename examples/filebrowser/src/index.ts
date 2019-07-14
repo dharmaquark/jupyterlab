@@ -27,6 +27,8 @@ import { DocumentManager } from '@jupyterlab/docmanager';
 
 import { DocumentRegistry } from '@jupyterlab/docregistry';
 
+import { ImageViewerFactory } from '@jupyterlab/imageviewer';
+
 import {
   CodeMirrorEditorFactory,
   CodeMirrorMimeTypeService
@@ -47,6 +49,7 @@ function createApp(manager: ServiceManager.IManager): void {
 
   let opener = {
     open: (widget: Widget) => {
+      console.error('TRYING TO OPEN WIDGET');
       if (widgets.indexOf(widget) === -1) {
         dock.addWidget(widget, { mode: 'tab-after' });
         widgets.push(widget);
@@ -81,7 +84,16 @@ function createApp(manager: ServiceManager.IManager): void {
       canStartKernel: true
     }
   });
+  let imgFactory = new ImageViewerFactory({
+    name: 'Image',
+    modelName: 'base64',
+    fileTypes: ['png', 'gif', 'jpeg', 'svg', 'bmp', 'ico', 'xbm', 'tiff'],
+    defaultFor: ['png', 'gif', 'jpeg', 'svg', 'bmp', 'ico', 'xbm', 'tiff'],
+    readOnly: true
+  });
   docRegistry.addWidgetFactory(wFactory);
+  console.error('ADDING IMAGE FACTORY');
+  docRegistry.addWidgetFactory(imgFactory);
 
   let commands = new CommandRegistry();
 
